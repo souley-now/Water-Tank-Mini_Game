@@ -394,6 +394,15 @@ def computer_play(computer_tank, computer_cards, water_cards_pile, power_cards_p
             best_card = card
             break
 
+    # Check if the opponent tank is between 10 and 30 computer have two DMT cards.
+    dmt_counter = 0
+    for card in computer_cards:
+        if card == 'DOT':
+            dmt_counter += 1
+        if dmt_counter == 2 and 10 <= opponent_tank <= 50:
+            best_card = card
+            break
+
     # If no special card was chosen, iterate through the computer's cards to find the best water card to play
     if best_card is None:
         for card in computer_cards:
@@ -450,6 +459,9 @@ def main():
     Main function to run the water tank game.
     Initializes the game, deals cards, and manages turns between human and computer players.
     """
+    # print game instructions
+    print("\nWater Tank is a competitive card game played between two players. The players will be a human player and a computer player. Each player starts with an empty water tank, which they need to fill. The goal is to be the first player to fill their tank. A tank is filled if it reaches the value of 75 to 80 units (inclusive). There are two types of cards: water cards and power cards. There will be a pile for each type of card (one pile for water and one pile for power). Each water card has a value that represents the amount of water that it contributes to the tank. When a water card is played, that player adds the specified amount of water to their tank. \n\nPower cards allow players to perform special actions:\n \t● SOH (Steal Opponent’s Half): Take half the water in your opponent’s tank and add it to your own\n \t● DOT (Drain Opponent’s Tank): Empty your opponent’s tank completely\n \t● DMT (Double My Tank): Double the current value of your own tank.\n\nIf a player’s water level exceeds their tank’s maximum fill value, an overflow happens. In the case of an overflow, extra water sloshes out of the tank. The amount of water that remains in the tank is determined by a formula: remaining water = maximum fill value - overflow.\n")
+
     # Initialize Tanks
     human_tank = 0
     computer_tank = 0
